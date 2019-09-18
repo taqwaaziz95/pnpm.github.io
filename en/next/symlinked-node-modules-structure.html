@@ -79,7 +79,7 @@
 For the more complex scenario of dependencies with peers, see <a href="how-peers-are-resolved">How peers are resolved</a>.</p>
 </blockquote>
 <p>pnpm's <code>node_modules</code> layout uses symbolic links to create a nested structure of dependencies.</p>
-<p>Every <code>package@version</code> is linked to <code>node_modules</code> from the <a href="about-the-package-store">global store</a> only once.
+<p>Every <code>package@version</code> is linked to <code>node_modules</code> from the <a href="about-package-store">global store</a> only once.
 Let's say you install <code>foo@1.0.0</code> that depends on <code>bar@1.0.0</code>. pnpm will hard link both packages to <code>node_modules</code> like this:</p>
 <pre><code class="hljs">node_modules
 └─ .registry.npmjs.org
