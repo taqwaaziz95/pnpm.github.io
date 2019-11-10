@@ -78,7 +78,7 @@
 To prevent devs from using other package managers, add the following <code>preinstall</code> script to your <code>package.json</code>:</p>
 <pre><code class="hljs css language-json">{
   <span class="hljs-attr">"scripts"</span>: {
-    <span class="hljs-attr">"preinstall"</span>: <span class="hljs-string">"node -e '!process.env.npm_config_user_agent.startsWith(\"pnpm/\")&amp;&amp;!console.log(\"Use `npx pnpm install` to install dependencies in this repository\\n\")&amp;&amp;process.exit(1)'"</span>
+    <span class="hljs-attr">"preinstall"</span>: <span class="hljs-string">"node -e \"!process.env.npm_config_user_agent.startsWith('pnpm/')&amp;&amp;!console.log('Use `npx pnpm install` to install dependencies in this repository\\n')&amp;&amp;process.exit(1)\""</span>
   }
 }
 </code></pre>
