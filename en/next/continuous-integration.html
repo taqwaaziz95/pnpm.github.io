@@ -79,8 +79,11 @@
 <p>On <a href="https://travis-ci.org/">Travis CI</a>, you can use pnpm for installing your dependencies by adding this to your <code>.travis.yml</code> file:</p>
 <pre><code class="hljs css language-yaml"><span class="hljs-attr">cache:</span>
 <span class="hljs-attr">  npm:</span> <span class="hljs-literal">false</span>
+<span class="hljs-attr">  directories:</span>
+<span class="hljs-bullet">    -</span> <span class="hljs-string">"~/.pnpm-store"</span>
 <span class="hljs-attr">before_install:</span>
 <span class="hljs-bullet">  -</span> <span class="hljs-string">curl</span> <span class="hljs-bullet">-L</span> <span class="hljs-attr">https://unpkg.com/@pnpm/self-installer</span> <span class="hljs-string">| node
+  - pnpm config set store-dir ~/.pnpm-store
 </span><span class="hljs-attr">install:</span>
 <span class="hljs-bullet">  -</span> <span class="hljs-string">pnpm</span> <span class="hljs-string">install</span>
 </code></pre>
