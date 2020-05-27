@@ -1,0 +1,188 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Flat node_modules is not the only way · pnpm</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="New users of pnpm frequently ask me about the weird structure of `node_modules` that pnpm creates. Why is it not flat? Where are all the sub-dependencies?"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Flat node_modules is not the only way · pnpm"/><meta property="og:type" content="website"/><meta property="og:url" content="https://pnpm.js.org/blog/2020/05/27/flat-node-modules-is-not-the-only-way"/><meta property="og:description" content="New users of pnpm frequently ask me about the weird structure of `node_modules` that pnpm creates. Why is it not flat? Where are all the sub-dependencies?"/><meta property="og:image" content="https://pnpm.js.org/img/ogimage.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://pnpm.js.org/img/ogimage.png"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="alternate" type="application/atom+xml" href="https://pnpm.js.org/blog/atom.xml" title="pnpm Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://pnpm.js.org/blog/feed.xml" title="pnpm Blog RSS Feed"/><script>
+              (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+              })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+              ga('create', 'UA-91385296-1', 'auto');
+              ga('send', 'pageview');
+            </script><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/pnpm-no-name-with-frame.svg" alt="pnpm"/><h2 class="headerTitleWithLogo">pnpm</h2></a><a href="/en/versions"><h3>4.14</h3></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/en/motivation" target="_self">Docs</a></li><li class=""><a href="/en/faq" target="_self">FAQ</a></li><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class="siteNavGroupActive"><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/de">Deutsch</a></li><li><a href="/es-ES">Español</a></li><li><a href="/hu">Magyar</a></li><li><a href="/pt-BR">Português (Brasil)</a></li><li><a href="/ru">Русский</a></li><li><a href="/uk">Українська</a></li><li><a href="/zh-CN">中文</a></li><li><a href="https://crowdin.com/project/pnpm" target="_blank" rel="noreferrer noopener">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul class=""><li class="navListItem navListItemActive"><a class="navItem" href="/blog/2020/05/27/flat-node-modules-is-not-the-only-way">Flat node_modules is not the only way</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="lonePost"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2020/05/27/flat-node-modules-is-not-the-only-way">Flat node_modules is not the only way</a></h1><p class="post-meta">May 27, 2020</p><div class="authorBlock"><p class="post-authorName"><a href="http://twitter.com/zoltankochan" target="_blank" rel="noreferrer noopener">Zoltan Kochan</a></p><div class="authorPhoto"><a href="http://twitter.com/zoltankochan" target="_blank" rel="noreferrer noopener"><img src="https://pbs.twimg.com/profile_images/1143606083262586880/EW2GCFKK_400x400.jpg" alt="Zoltan Kochan"/></a></div></div></header><div><span><p>New users of pnpm frequently ask me about the weird structure of <code>node_modules</code> that pnpm creates. Why is it not flat? Where are all the sub-dependencies?</p>
+<!--truncate-->
+<blockquote>
+<p>I am going to assume that readers of the article are already familiar with flat <code>node_modules</code> created by npm and Yarn. If you don't understand why npm 3 had to start using flat <code>node_modules</code> in v3, you can find some prehistory in <a href="https://www.kochan.io/nodejs/why-should-we-use-pnpm.html">Why should we use pnpm?</a>.</p>
+</blockquote>
+<p>So why is pnpm's <code>node_modules</code> unusual? Let's create two directories and run <code>npm add express</code> in one of them and <code>pnpm add express</code> in the other one. Here's the top of what you get in the first directory's <code>node_modules</code>:</p>
+<pre><code class="hljs css language-text">.bin
+accepts
+array-flatten
+body-parser
+bytes
+content-disposition
+cookie-signature
+cookie
+debug
+depd
+destroy
+ee-first
+encodeurl
+escape-html
+etag
+express
+</code></pre>
+<p>You can see the whole directory <a href="https://github.com/zkochan/comparing-node-modules/tree/master/npm-example/node_modules">here</a>.</p>
+<p>And this is what you get in the <code>node_modules</code> created by pnpm:</p>
+<pre><code class="hljs css language-text">.pnpm
+.modules.yaml
+express
+</code></pre>
+<p>You can check it <a href="https://github.com/zkochan/comparing-node-modules/tree/master/pnpm5-example/node_modules">here</a>.</p>
+<p>So where are all the dependencies? There is only one folder in the <code>node_modules</code> called <code>.pnpm</code> and a symlink called <code>express</code>. Well, we installed only <code>express</code>, so that is the only package that your application has to have access to</p>
+<blockquote>
+<p>Read more about why pnpm's strictness is a good thing <a href="https://medium.com/pnpm/pnpms-strictness-helps-to-avoid-silly-bugs-9a15fb306308">here</a></p>
+</blockquote>
+<p>Let's see what is inside <code>express</code>:</p>
+<pre><code class="hljs css language-text">▾ node_modules
+  ▸ .pnpm
+  ▾ express
+    ▸ lib
+      History.md
+      index.js
+      LICENSE
+      package.json
+      Readme.md
+    .modules.yaml
+</code></pre>
+<p><code>express</code> has no <code>node_modules</code>? Where are all the dependencies of <code>express</code>?</p>
+<p>The trick is that <code>express</code> is just a symlink. When Node.js resolves dependencies, it uses their real locations, so it does not preserve symlinks. But where is the real location of <code>express</code>, you might ask?</p>
+<p>Here: <a href="https://github.com/zkochan/comparing-node-modules/tree/master/pnpm5-example/node_modules/.pnpm/express@4.17.1/node_modules/express">node_modules/.pnpm/express@4.17.1/node_modules/express</a>.</p>
+<p>OK, so now we know the purpose of the <code>.pnpm/</code> folder. <code>.pnpm/</code> stores all the packages in a flat folder structure, so every package can be found in a folder named by this pattern:</p>
+<pre><code class="hljs css language-text">.pnpm/&lt;name>@&lt;version>/node_modules/&lt;name>
+</code></pre>
+<p>We call it the virtual store directory.</p>
+<p>This flat structure avoids the long path issues that were caused by the nested <code>node_modules</code> created by npm v2 but keeps packages isolated unlike the flat <code>node_modules</code> created by npm v3,4,5,6 or Yarn v1.</p>
+<p>Now let's look into the real location of <code>express</code>:</p>
+<pre><code class="hljs css language-text">  ▾ express
+    ▸ lib
+      History.md
+      index.js
+      LICENSE
+      package.json
+      Readme.md
+</code></pre>
+<p>Is it a scam? It still lacks <code>node_modules</code>! The second trick of pnpm's <code>node_modules</code> structure is that the dependencies of packages are on the same directory level on which the real location of the dependent package. So dependencies of <code>express</code> are not in <code>.pnpm/express@4.17.1/node_modules/express/node_modules/</code> but in <a href="https://github.com/zkochan/comparing-node-modules/tree/master/pnpm5-example/node_modules/.pnpm/express@4.17.1/node_modules">.pnpm/express@4.17.1/node_modules/</a>:</p>
+<pre><code class="hljs css language-text">▾ node_modules
+  ▾ .pnpm
+    ▸ accepts@1.3.5
+    ▸ array-flatten@1.1.1
+    ...
+    ▾ express@4.16.3
+      ▾ node_modules
+        ▸ accepts
+        ▸ array-flatten
+        ▸ body-parser
+        ▸ content-disposition
+        ...
+        ▸ etag
+        ▾ express
+          ▸ lib
+            History.md
+            index.js
+            LICENSE
+            package.json
+            Readme.md
+</code></pre>
+<p>All the dependencies of <code>express</code> are symlinks to appropriate directories in <code>node_modules/.pnpm/</code>. Placing dependencies of <code>express</code> one level up allows avoiding circular symlinks.</p>
+<p>So as you can see, even though pnpm's <code>node_modules</code> structure seems unusual at first:</p>
+<ol>
+<li>it is completely Node.js compatible</li>
+<li>packages are nicely grouped with their dependencies</li>
+</ol>
+<p>The structure is a little bit <a href="https://pnpm.js.org/docs/en/how-peers-are-resolved.html">more complex</a> for packages with peer dependencies but the idea is the same: using symlinks to create a nesting with a flat directory structure.</p>
+</span></div></div><div class="blogSocialSection"></div></div><div class="blog-recent"><a class="button" href="/blog">Recent Posts</a></div></div></div><nav class="onPageNav"></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/pnpm-light.svg" alt="pnpm" width="66" height="58"/></a><div><h5>Docs</h5><a href="/en/installation.html">Getting Started</a></div><div><h5>Community</h5><a href="/en/users.html">User Showcase</a><a href="http://stackoverflow.com/questions/tagged/pnpm" target="_blank">Stack Overflow</a><a href="https://gitter.im/pnpm/pnpm">Project Chat</a><a href="https://twitter.com/pnpmjs" target="_blank">Twitter</a></div><div><h5>More</h5><a href="https://medium.com/pnpm">Blog</a><a href="https://github.com/pnpm/pnpm">GitHub</a><a class="github-button" href="https://github.com/pnpm/pnpm" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '802b1d6ee5450a4296581a8e14aff417',
+                indexName: 'pnpm',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["language:en","version:4.14"]}
+              });
+            </script></body></html>
