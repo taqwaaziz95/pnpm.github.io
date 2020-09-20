@@ -62,19 +62,19 @@
                 };
               }
             });
-        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/pnpm/pnpm.github.io/edit/source/docs/workspace.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">Workspace</h1></header><article><div><span><p>pnpm supports concurrent actions in multi-package repositories (workspaces).</p>
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/pnpm/pnpm.github.io/edit/source/docs/workspace.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 class="postHeaderTitle">Workspace</h1></header><article><div><span><p>pnpm supports concurrent actions in multi-package repositories (workspaces).</p>
 <p>By default, when you run the <a href="pnpm-recursive"><code>pnpm recursive [action]</code></a> commands,
 all the directories are searched for packages (directories with <code>package.json</code> file).
 You can control what directories are searched by passing an array of globs to <code>packages</code> in <code>pnpm-workspace.yaml</code>.</p>
 <p>An example of a <code>pnpm-workspace.yaml</code>:</p>
 <pre><code class="hljs css language-yaml"><span class="hljs-attr">packages:</span>
   <span class="hljs-comment"># the root package.json</span>
-  <span class="hljs-bullet">-</span> <span class="hljs-string">'.'</span>
+<span class="hljs-bullet">  -</span> <span class="hljs-string">'.'</span>
   <span class="hljs-comment"># all packages in subdirs of packages/ and components/</span>
-  <span class="hljs-bullet">-</span> <span class="hljs-string">'packages/**'</span>
-  <span class="hljs-bullet">-</span> <span class="hljs-string">'components/**'</span>
+<span class="hljs-bullet">  -</span> <span class="hljs-string">'packages/**'</span>
+<span class="hljs-bullet">  -</span> <span class="hljs-string">'components/**'</span>
   <span class="hljs-comment"># exclude packages that are inside test/ directories</span>
-  <span class="hljs-bullet">-</span> <span class="hljs-string">'!**/test/**'</span>
+<span class="hljs-bullet">  -</span> <span class="hljs-string">'!**/test/**'</span>
 </code></pre>
 <p><code>pnpm-workspace.yaml</code> should be in the root of the workspace.</p>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/en/3.3/continuous-integration"><span class="arrow-prev">← </span><span>Continuous Integration</span></a><a class="docs-next button" href="/en/3.3/benchmark"><span>Benchmark</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/pnpm-light.svg" alt="pnpm" width="66" height="58"/></a><div><h5>Docs</h5><a href="/en/installation.html">Getting Started</a></div><div><h5>Community</h5><a href="/en/users.html">User Showcase</a><a href="http://stackoverflow.com/questions/tagged/pnpm" target="_blank">Stack Overflow</a><a href="https://gitter.im/pnpm/pnpm">Project Chat</a><a href="https://twitter.com/pnpmjs" target="_blank">Twitter</a></div><div><h5>More</h5><a href="/blog/">Blog</a><a href="https://github.com/pnpm/pnpm">GitHub</a><a class="github-button" href="https://github.com/pnpm/pnpm" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
