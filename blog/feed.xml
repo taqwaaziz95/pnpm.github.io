@@ -4,7 +4,7 @@
         <title>pnpm Blog</title>
         <link>https://pnpm.js.org/blog</link>
         <description>The best place to stay up-to-date with the latest pnpm news and events.</description>
-        <lastBuildDate>Wed, 27 May 2020 06:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Sat, 17 Oct 2020 06:00:00 GMT</lastBuildDate>
         <docs>http://blogs.law.harvard.edu/tech/rss</docs>
         <generator>Feed for Node.js</generator>
         <image>
@@ -13,6 +13,16 @@
             <link>https://pnpm.js.org/blog</link>
         </image>
         <copyright>Copyright © 2020 contributors of pnpm</copyright>
+        <item>
+            <title><![CDATA[Node-Modules configuration options with pnpm]]></title>
+            <link>https://pnpm.js.org/blog/2020/10/17/node-modules-configuration-options-with-pnpm.html</link>
+            <guid>https://pnpm.js.org/blog/2020/10/17/node-modules-configuration-options-with-pnpm.html</guid>
+            <pubDate>Sat, 17 Oct 2020 06:00:00 GMT</pubDate>
+            <description><![CDATA[<p>There are many ways to create a node_modules directory.
+Your goal must be to create the most strict one but if that is not possible,
+there are options to make a loose node_modules as well.</p>
+]]></description>
+        </item>
         <item>
             <title><![CDATA[Flat node_modules is not the only way]]></title>
             <link>https://pnpm.js.org/blog/2020/05/27/flat-node-modules-is-not-the-only-way.html</link>
