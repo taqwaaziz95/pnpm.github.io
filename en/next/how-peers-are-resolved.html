@@ -79,7 +79,7 @@ in the same project.</p>
 <p>In the example above, <code>foo@1.0.0</code> is installed for <code>foo-parent-1</code> and <code>foo-parent-2</code>. Both packages have <code>bar</code> and <code>baz</code>as well, but
 they depend on different versions of <code>baz</code>. As a result, <code>foo@1.0.0</code> has two different sets of dependencies: one with <code>baz@1.0.0</code>
 and the other one with <code>baz@1.1.0</code>. To support these use cases, pnpm has to hard link <code>foo@1.0.0</code> as many times as many different dependency sets it has.</p>
-<p>Normally, if a package does not have peer dependencies, it is hard linked to a <code>node_modules</code> folder next to symlinks of its dependencies.</p>
+<p>Normally, if a package does not have peer dependencies, it is hard linked to a <code>node_modules</code> directory next to symlinks of its dependencies.</p>
 <p><img src="/img/how-peers-are-resolved/1.png" alt=""></p>
 <p>However, if <code>foo</code> has peer dependencies, there cannot be one single set of dependencies for it, so
 we create different sets, for different peer dependency resolutions:</p>

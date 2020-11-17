@@ -6,7 +6,7 @@
 
               ga('create', 'UA-91385296-1', 'auto');
               ga('send', 'pageview');
-            </script><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/pnpm-no-name-with-frame.svg" alt="pnpm"/><h2 class="headerTitleWithLogo">pnpm</h2></a><a href="/en/versions"><h3>5.12</h3></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/en/motivation" target="_self">Docs</a></li><li class=""><a href="/en/faq" target="_self">FAQ</a></li><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class="siteNavGroupActive"><a href="/blog/" target="_self">Blog</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul class=""><li class="navListItem"><a class="navItem" href="/blog/2020/10/17/node-modules-configuration-options-with-pnpm">Node-Modules configuration options with pnpm</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/blog/2020/05/27/flat-node-modules-is-not-the-only-way">Flat node_modules is not the only way</a></li></ul></div></div></section></div><script>
+            </script><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/pnpm-no-name-with-frame.svg" alt="pnpm"/><h2 class="headerTitleWithLogo">pnpm</h2></a><a href="/en/versions"><h3>5.13</h3></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/en/motivation" target="_self">Docs</a></li><li class=""><a href="/en/faq" target="_self">FAQ</a></li><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class="siteNavGroupActive"><a href="/blog/" target="_self">Blog</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul class=""><li class="navListItem"><a class="navItem" href="/blog/2020/10/17/node-modules-configuration-options-with-pnpm">Node-Modules configuration options with pnpm</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/blog/2020/05/27/flat-node-modules-is-not-the-only-way">Flat node_modules is not the only way</a></li></ul></div></div></section></div><script>
             var coll = document.getElementsByClassName('collapsible');
             var checkActiveCategory = true;
             for (var i = 0; i < coll.length; i++) {
@@ -92,7 +92,7 @@ express
 express
 </code></pre>
 <p>You can check it <a href="https://github.com/zkochan/comparing-node-modules/tree/master/pnpm5-example/node_modules">here</a>.</p>
-<p>So where are all the dependencies? There is only one folder in the <code>node_modules</code> called <code>.pnpm</code> and a symlink called <code>express</code>. Well, we installed only <code>express</code>, so that is the only package that your application has to have access to</p>
+<p>So where are all the dependencies? There is only one directory in the <code>node_modules</code> called <code>.pnpm</code> and a symlink called <code>express</code>. Well, we installed only <code>express</code>, so that is the only package that your application has to have access to</p>
 <blockquote>
 <p>Read more about why pnpm's strictness is a good thing <a href="https://medium.com/pnpm/pnpms-strictness-helps-to-avoid-silly-bugs-9a15fb306308">here</a></p>
 </blockquote>
@@ -111,7 +111,7 @@ express
 <p><code>express</code> has no <code>node_modules</code>? Where are all the dependencies of <code>express</code>?</p>
 <p>The trick is that <code>express</code> is just a symlink. When Node.js resolves dependencies, it uses their real locations, so it does not preserve symlinks. But where is the real location of <code>express</code>, you might ask?</p>
 <p>Here: <a href="https://github.com/zkochan/comparing-node-modules/tree/master/pnpm5-example/node_modules/.pnpm/express@4.17.1/node_modules/express">node_modules/.pnpm/express@4.17.1/node_modules/express</a>.</p>
-<p>OK, so now we know the purpose of the <code>.pnpm/</code> folder. <code>.pnpm/</code> stores all the packages in a flat folder structure, so every package can be found in a folder named by this pattern:</p>
+<p>OK, so now we know the purpose of the <code>.pnpm/</code> directory. <code>.pnpm/</code> stores all the packages in a flat directory structure, so every package can be found in a directory named by this pattern:</p>
 <pre><code class="hljs css language-text">.pnpm/&lt;name>@&lt;version>/node_modules/&lt;name>
 </code></pre>
 <p>We call it the virtual store directory.</p>
@@ -171,6 +171,6 @@ express
                 apiKey: '802b1d6ee5450a4296581a8e14aff417',
                 indexName: 'pnpm',
                 inputSelector: '#search_input_react',
-                algoliaOptions: {"facetFilters":["language:en","version:5.12"]}
+                algoliaOptions: {"facetFilters":["language:en","version:5.13"]}
               });
             </script></body></html>
