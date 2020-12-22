@@ -80,15 +80,15 @@ Let's say you install <code>foo@1.0.0</code> that depends on <code>bar@1.0.0</co
 </code></pre>
 <p>These are the only &quot;real files&quot; in <code>node_modules</code>. Once all the packages are hard linked to <code>node_modules</code>, symlinks are
 created to build the nested dependency graph structure.</p>
-<p>As you might have noticed, both packages are hard linked into a subdirectory inside a <code>node_modules</code> directory (<code>foo/1.0.0/node_modules/foo</code>).
+<p>As you might have noticed, both packages are hard linked into a subfolder inside a <code>node_modules</code> folder (<code>foo/1.0.0/node_modules/foo</code>).
 This is needed to:</p>
 <ol>
 <li><strong>allow packages to require themselves.</strong> <code>foo</code> should be able to do <code>require('foo/package.json')</code>.</li>
-<li><strong>avoid circular symlinks.</strong> Dependencies of packages are placed in the same directory in which the dependent packages are.
+<li><strong>avoid circular symlinks.</strong> Dependencies of packages are placed in the same folder in which the dependent packages are.
 For Node.js it doesn't make a difference whether dependencies are inside the package's <code>node_modules</code> or in any other
 <code>node_modules</code> in the parent directories.</li>
 </ol>
-<p>The next stage of installation is symlinking dependencies. <code>bar</code> is going to be symlinked to the <code>foo/1.0.0/node_modules</code> directory:</p>
+<p>The next stage of installation is symlinking dependencies. <code>bar</code> is going to be symlinked to the <code>foo/1.0.0/node_modules</code> folder:</p>
 <pre><code class="hljs">node_modules
 └─ .registry.npmjs.org
    ├─ bar/<span class="hljs-number">1.0</span><span class="hljs-number">.0</span>/node_modules/bar
@@ -96,7 +96,7 @@ For Node.js it doesn't make a difference whether dependencies are inside the pac
       ├─ foo
       └─ bar -&gt; ../../../bar/<span class="hljs-number">1.0</span><span class="hljs-number">.0</span>/node_modules/bar
 </code></pre>
-<p><code>foo</code> is going to be symlinked to the root <code>node_modules</code> directory because <code>foo</code> is a dependency of the project:</p>
+<p><code>foo</code> is going to be symlinked to the root <code>node_modules</code> folder because <code>foo</code> is a dependency of the project:</p>
 <pre><code class="hljs">node_modules
 ├─ foo -&gt; .registry.npmjs.org/foo/<span class="hljs-number">1.0</span><span class="hljs-number">.0</span>/node_modules/foo
 └─ .registry.npmjs.org
