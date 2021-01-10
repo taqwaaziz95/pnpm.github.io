@@ -7,7 +7,7 @@
     <link rel="alternate" href="https://pnpm.js.org/blog"/>
     <subtitle>The best place to stay up-to-date with the latest pnpm news and events.</subtitle>
     <logo>https://pnpm.js.org/img/pnpm-no-name-with-frame.svg</logo>
-    <rights>Copyright © 2020 contributors of pnpm</rights>
+    <rights>Copyright © 2021 contributors of pnpm</rights>
     <entry>
         <title type="html"><![CDATA[Node-Modules configuration options with pnpm]]></title>
         <id>https://pnpm.js.org/blog/2020/10/17/node-modules-configuration-options-with-pnpm.html</id>

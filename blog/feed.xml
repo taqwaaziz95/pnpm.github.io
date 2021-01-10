@@ -12,7 +12,7 @@
             <url>https://pnpm.js.org/img/pnpm-no-name-with-frame.svg</url>
             <link>https://pnpm.js.org/blog</link>
         </image>
-        <copyright>Copyright © 2020 contributors of pnpm</copyright>
+        <copyright>Copyright © 2021 contributors of pnpm</copyright>
         <item>
             <title><![CDATA[Node-Modules configuration options with pnpm]]></title>
             <link>https://pnpm.js.org/blog/2020/10/17/node-modules-configuration-options-with-pnpm.html</link>
