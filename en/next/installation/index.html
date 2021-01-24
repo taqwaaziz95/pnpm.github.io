@@ -66,11 +66,11 @@
 <pre><code class="hljs css language-sh">npm install -g pnpm
 </code></pre>
 <p>Other solutions are:</p>
-<p>Using a <a href="https://github.com/pnpm/self-installer#readme">standalone script</a>:</p>
-<pre><code class="hljs css language-sh">curl -L https://raw.githubusercontent.com/pnpm/self-installer/master/install.js | node
+<p>Using a standalone script:</p>
+<pre><code class="hljs css language-sh">curl -L https://pnpm.js.org/pnpm.js | node - add --global pnpm
 </code></pre>
 <p>On Windows (PowerShell):</p>
-<pre><code class="hljs css language-powershell">(<span class="hljs-built_in">Invoke-WebRequest</span> <span class="hljs-string">'https://raw.githubusercontent.com/pnpm/self-installer/master/install.js'</span>).Content | node
+<pre><code class="hljs css language-powershell">(<span class="hljs-built_in">Invoke-WebRequest</span> <span class="hljs-string">'https://pnpm.js.org/pnpm.js'</span> -UseBasicParsing).Content | node - add --global pnpm
 </code></pre>
 <p>Via npx:</p>
 <pre><code class="hljs css language-sh">npx pnpm add -g pnpm
