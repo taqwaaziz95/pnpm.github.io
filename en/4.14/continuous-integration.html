@@ -62,54 +62,54 @@
                 };
               }
             });
-        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/pnpm/pnpm.github.io/edit/source/docs/continuous-integration.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">Continuous Integration</h1></header><article><div><span><p>pnpm can easily be used in various continuous integration systems.</p>
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/pnpm/pnpm.github.io/edit/source/docs/continuous-integration.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 class="postHeaderTitle">Continuous Integration</h1></header><article><div><span><p>pnpm can easily be used in various continuous integration systems.</p>
 <h2><a class="anchor" aria-hidden="true" id="travis"></a><a href="#travis" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Travis</h2>
 <p>On <a href="https://travis-ci.org/">Travis CI</a>, you can use pnpm for installing your dependencies by adding this to your <code>.travis.yml</code> file:</p>
 <pre><code class="hljs css language-yaml"><span class="hljs-attr">cache:</span>
-  <span class="hljs-attr">npm:</span> <span class="hljs-literal">false</span>
-  <span class="hljs-attr">directories:</span>
-    <span class="hljs-bullet">-</span> <span class="hljs-string">"~/.pnpm-store"</span>
+<span class="hljs-attr">  npm:</span> <span class="hljs-literal">false</span>
+<span class="hljs-attr">  directories:</span>
+<span class="hljs-bullet">    -</span> <span class="hljs-string">"~/.pnpm-store"</span>
 <span class="hljs-attr">before_install:</span>
-  <span class="hljs-bullet">-</span> <span class="hljs-string">curl</span> <span class="hljs-string">-L</span> <span class="hljs-string">https://unpkg.com/@pnpm/self-installer</span> <span class="hljs-string">|</span> <span class="hljs-string">node</span>
-  <span class="hljs-bullet">-</span> <span class="hljs-string">pnpm</span> <span class="hljs-string">config</span> <span class="hljs-string">set</span> <span class="hljs-string">store-dir</span> <span class="hljs-string">~/.pnpm-store</span>
-<span class="hljs-attr">install:</span>
-  <span class="hljs-bullet">-</span> <span class="hljs-string">pnpm</span> <span class="hljs-string">install</span>
+<span class="hljs-bullet">  -</span> <span class="hljs-string">curl</span> <span class="hljs-bullet">-L</span> <span class="hljs-attr">https://unpkg.com/@pnpm/self-installer</span> <span class="hljs-string">| node
+  - pnpm config set store-dir ~/.pnpm-store
+</span><span class="hljs-attr">install:</span>
+<span class="hljs-bullet">  -</span> <span class="hljs-string">pnpm</span> <span class="hljs-string">install</span>
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="semaphore"></a><a href="#semaphore" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Semaphore</h2>
 <p>On <a href="https://semaphoreci.com">Semaphore</a>, you can use pnpm for installing and caching your dependencies by adding this to your <code>.semaphore/semaphore.yml</code> file:</p>
 <pre><code class="hljs css language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">v1.0</span>
 <span class="hljs-attr">name:</span> <span class="hljs-string">Semaphore</span> <span class="hljs-string">CI</span> <span class="hljs-string">pnpm</span> <span class="hljs-string">example</span>
 <span class="hljs-attr">agent:</span>
-  <span class="hljs-attr">machine:</span>
-    <span class="hljs-attr">type:</span> <span class="hljs-string">e1-standard-2</span>
-    <span class="hljs-attr">os_image:</span> <span class="hljs-string">ubuntu1804</span>
+<span class="hljs-attr">  machine:</span>
+<span class="hljs-attr">    type:</span> <span class="hljs-string">e1-standard-2</span>
+<span class="hljs-attr">    os_image:</span> <span class="hljs-string">ubuntu1804</span>
 <span class="hljs-attr">blocks:</span>
-  <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Install</span> <span class="hljs-string">dependencies</span>
-    <span class="hljs-attr">task:</span>
-      <span class="hljs-attr">jobs:</span>
-        <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">pnpm</span> <span class="hljs-string">install</span>
-          <span class="hljs-attr">commands:</span>
-            <span class="hljs-bullet">-</span> <span class="hljs-string">curl</span> <span class="hljs-string">-L</span> <span class="hljs-string">https://unpkg.com/@pnpm/self-installer</span> <span class="hljs-string">|</span> <span class="hljs-string">node</span>
-            <span class="hljs-bullet">-</span> <span class="hljs-string">checkout</span>
-            <span class="hljs-bullet">-</span> <span class="hljs-string">cache</span> <span class="hljs-string">restore</span> <span class="hljs-string">node-modules-$SEMAPHORE_GIT_BRANCH-$(checksum</span> <span class="hljs-string">package-lock.json),node-modules-$SEMAPHORE_GIT_BRANCH,node-modules-master</span>
-            <span class="hljs-bullet">-</span> <span class="hljs-string">pnpm</span> <span class="hljs-string">install</span>
-            <span class="hljs-bullet">-</span> <span class="hljs-string">cache</span> <span class="hljs-string">store</span> <span class="hljs-string">node-modules-$SEMAPHORE_GIT_BRANCH-$(checksum</span> <span class="hljs-string">package-lock.json)</span> <span class="hljs-string">node_modules</span>
-</code></pre>
+<span class="hljs-attr">  - name:</span> <span class="hljs-string">Install</span> <span class="hljs-string">dependencies</span>
+<span class="hljs-attr">    task:</span>
+<span class="hljs-attr">      jobs:</span>
+<span class="hljs-attr">        - name:</span> <span class="hljs-string">pnpm</span> <span class="hljs-string">install</span>
+<span class="hljs-attr">          commands:</span>
+<span class="hljs-bullet">            -</span> <span class="hljs-string">curl</span> <span class="hljs-bullet">-L</span> <span class="hljs-attr">https://unpkg.com/@pnpm/self-installer</span> <span class="hljs-string">| node
+            - checkout
+            - cache restore node-modules-$SEMAPHORE_GIT_BRANCH-$(checksum package-lock.json),node-modules-$SEMAPHORE_GIT_BRANCH,node-modules-master
+            - pnpm install
+            - cache store node-modules-$SEMAPHORE_GIT_BRANCH-$(checksum package-lock.json) node_modules
+</span></code></pre>
 <h2><a class="anchor" aria-hidden="true" id="appveyor"></a><a href="#appveyor" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>AppVeyor</h2>
 <p>On <a href="https://www.appveyor.com/">AppVeyor</a>, you can use pnpm for installing your dependencies by adding this to your <code>appveyor.yml</code>:</p>
 <pre><code class="hljs css language-yaml"><span class="hljs-attr">install:</span>
-  <span class="hljs-bullet">-</span> <span class="hljs-attr">ps:</span> <span class="hljs-string">Install-Product</span> <span class="hljs-string">node</span> <span class="hljs-string">$env:nodejs_version</span>
-  <span class="hljs-bullet">-</span> <span class="hljs-string">curl</span> <span class="hljs-string">-L</span> <span class="hljs-string">https://unpkg.com/@pnpm/self-installer</span> <span class="hljs-string">|</span> <span class="hljs-string">node</span>
-  <span class="hljs-bullet">-</span> <span class="hljs-string">pnpm</span> <span class="hljs-string">install</span>
-</code></pre>
+<span class="hljs-attr">  - ps:</span> <span class="hljs-string">Install-Product</span> <span class="hljs-string">node</span> <span class="hljs-string">$env:nodejs_version</span>
+<span class="hljs-bullet">  -</span> <span class="hljs-string">curl</span> <span class="hljs-bullet">-L</span> <span class="hljs-attr">https://unpkg.com/@pnpm/self-installer</span> <span class="hljs-string">| node
+  - pnpm install
+</span></code></pre>
 <h2><a class="anchor" aria-hidden="true" id="sail-ci"></a><a href="#sail-ci" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Sail CI</h2>
 <p>On <a href="https://sail.ci/">Sail CI</a>, you can use pnpm for installing your dependencies by adding this to your <code>.sail.yml</code> file:</p>
 <pre><code class="hljs css language-yaml"><span class="hljs-attr">install:</span>
-  <span class="hljs-attr">image:</span> <span class="hljs-string">znck/pnpm:latest</span>
-  <span class="hljs-attr">command:</span>
-    <span class="hljs-bullet">-</span> <span class="hljs-string">pnpm</span>
-  <span class="hljs-attr">args:</span>
-    <span class="hljs-bullet">-</span> <span class="hljs-string">install</span>
+<span class="hljs-attr">  image:</span> <span class="hljs-string">znck/pnpm:latest</span>
+<span class="hljs-attr">  command:</span>
+<span class="hljs-bullet">    -</span> <span class="hljs-string">pnpm</span>
+<span class="hljs-attr">  args:</span>
+<span class="hljs-bullet">    -</span> <span class="hljs-string">install</span>
 </code></pre>
 <p>To get the exact Node version and pnpm version you require you can always make your own Docker image and push to <a href="https://hub.docker.com/">Docker Hub</a>.</p>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/en/4.14/completion"><span class="arrow-prev">← </span><span>Command line tab-completion</span></a><a class="docs-next button" href="/en/4.14/only-allow-pnpm"><span>Only allow pnpm</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#travis">Travis</a></li><li><a href="#semaphore">Semaphore</a></li><li><a href="#appveyor">AppVeyor</a></li><li><a href="#sail-ci">Sail CI</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/pnpm-light.svg" alt="pnpm" width="66" height="58"/></a><div><h5>Docs</h5><a href="/en/installation.html">Getting Started</a></div><div><h5>Community</h5><a href="/en/users.html">User Showcase</a><a href="http://stackoverflow.com/questions/tagged/pnpm" target="_blank">Stack Overflow</a><a href="https://bit.ly/pnpm-discord-invite">Project Chat</a><a href="https://twitter.com/pnpmjs" target="_blank">Twitter</a></div><div><h5>More</h5><a href="/blog/">Blog</a><a href="https://github.com/pnpm/pnpm">GitHub</a><a class="github-button" href="https://github.com/pnpm/pnpm" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>

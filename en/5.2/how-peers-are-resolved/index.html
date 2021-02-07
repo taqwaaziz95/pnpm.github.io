@@ -62,7 +62,7 @@
                 };
               }
             });
-        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/pnpm/pnpm.github.io/edit/source/docs/how-peers-are-resolved.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">How peers are resolved</h1></header><article><div><span><p>One of the very great features of pnpm is that in one project, a specific version of a package will always have
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/pnpm/pnpm.github.io/edit/source/docs/how-peers-are-resolved.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 class="postHeaderTitle">How peers are resolved</h1></header><article><div><span><p>One of the very great features of pnpm is that in one project, a specific version of a package will always have
 one set of dependencies. There is one exclusion from it though - packages with <a href="https://docs.npmjs.com/files/package.json#peerdependencies">peer dependencies</a>.</p>
 <p>Peer dependencies are resolved from dependencies installed higher in the dependency graph.
 That means if <code>foo@1.0.0</code> has two peers (<code>bar@^1</code> and <code>baz@^1</code>) then it might have different sets of dependencies
