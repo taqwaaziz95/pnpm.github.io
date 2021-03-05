@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Limitations · pnpm</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="1. `npm-shrinkwrap.json` and `package-lock.json` are ignored. Unlike pnpm, npm can install the"/><meta name="docsearch:version" content="5.18"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Limitations · pnpm"/><meta property="og:type" content="website"/><meta property="og:url" content="https://pnpm.js.org/"/><meta property="og:description" content="1. `npm-shrinkwrap.json` and `package-lock.json` are ignored. Unlike pnpm, npm can install the"/><meta property="og:image" content="https://pnpm.js.org/img/ogimage.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://pnpm.js.org/img/ogimage.png"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="alternate" type="application/atom+xml" href="https://pnpm.js.org/blog/atom.xml" title="pnpm Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://pnpm.js.org/blog/feed.xml" title="pnpm Blog RSS Feed"/><script>
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Limitations · pnpm</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="1. `npm-shrinkwrap.json` and `package-lock.json` are ignored. Unlike pnpm, npm"/><meta name="docsearch:version" content="5.18"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Limitations · pnpm"/><meta property="og:type" content="website"/><meta property="og:url" content="https://pnpm.js.org/"/><meta property="og:description" content="1. `npm-shrinkwrap.json` and `package-lock.json` are ignored. Unlike pnpm, npm"/><meta property="og:image" content="https://pnpm.js.org/img/ogimage.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://pnpm.js.org/img/ogimage.png"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="alternate" type="application/atom+xml" href="https://pnpm.js.org/blog/atom.xml" title="pnpm Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://pnpm.js.org/blog/feed.xml" title="pnpm Blog RSS Feed"/><script>
               (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
               (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
               m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -63,20 +63,26 @@
               }
             });
         </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/pnpm/pnpm.github.io/edit/source/docs/limitations.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 class="postHeaderTitle">Limitations</h1></header><article><div><span><ol>
-<li><code>npm-shrinkwrap.json</code> and <code>package-lock.json</code> are ignored. Unlike pnpm, npm can install the
-same <code>name@version</code> multiple times and with different sets of dependencies.
-npm's shrinkwrap file is designed to reflect the <code>node_modules</code> layout created
-by npm. pnpm cannot create a similar layout, so it cannot respect
-npm's lockfile format. However, see <a href="cli/import">pnpm import</a>.</li>
-<li>You can't publish npm modules with <code>bundleDependencies</code> managed by pnpm.</li>
-<li>Binstubs (files in <code>node_modules/.bin</code>) are always shell files not
+<li><code>npm-shrinkwrap.json</code> and <code>package-lock.json</code> are ignored. Unlike pnpm, npm
+can install the same <code>name@version</code> multiple times and with different sets of
+dependencies. npm's lockfile is designed to reflect the flat <code>node_modules</code>
+layout, however, as pnpm cannot create a similar layout, it cannot respect
+npm's lockfile format. See <a href="cli/import">pnpm import</a> if you wish to convert a lockfile to
+pnpm's format, though.</li>
+<li>pnpm can't publish npm packages with <code>bundledDependencies</code>. Currently, there
+are no plans to add support for <code>bundledDependencies</code> either, as they do not
+work very consistently in publishing, even on npm. Instead, we recommend you use
+an actual package bundler, like webpack, rollup, or ESBuild.</li>
+<li>Binstubs (files in <code>node_modules/.bin</code>) are always shell files, not
 symlinks to JS files. The shell files are created to help pluggable CLI apps
 in finding their plugins in the unusual <code>node_modules</code> structure. This is very
-rarely an issue and if you expect the file to be a js file, just reference the
-original file instead, as described in <a href="https://github.com/pnpm/pnpm/issues/736">#736</a>.</li>
-<li>Node.js doesn't work with the <a href="https://nodejs.org/api/cli.html#cli_preserve_symlinks">--preserve-symlinks</a> flag when executed in a project that uses pnpm.</li>
+rarely an issue and if you expect the file to be a JS file, reference the
+original file directly instead, as described in <a href="https://github.com/pnpm/pnpm/issues/736">#736</a>.</li>
+<li>Node's <a href="https://nodejs.org/api/cli.html#cli_preserve_symlinks">--preserve-symlinks</a> flag does not work when executed in a project
+that uses pnpm.</li>
 </ol>
-<p>Got an idea for workarounds for these issues? <a href="https://github.com/pnpm/pnpm/issues/new">Share them.</a></p>
+<p>Got an idea for workarounds for these issues?
+<a href="https://github.com/pnpm/pnpm/issues/new">Share them.</a></p>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/en/benchmark"><span class="arrow-prev">← </span><span>Benchmark</span></a><a class="docs-next button" href="/en/about-package-store"><span>Next</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/pnpm-light.svg" alt="pnpm" width="66" height="58"/></a><div><h5>Docs</h5><a href="/en/installation.html">Getting Started</a></div><div><h5>Community</h5><a href="/en/users.html">User Showcase</a><a href="http://stackoverflow.com/questions/tagged/pnpm" target="_blank">Stack Overflow</a><a href="https://bit.ly/pnpm-discord-invite">Project Chat</a><a href="https://twitter.com/pnpmjs" target="_blank">Twitter</a></div><div><h5>More</h5><a href="/blog/">Blog</a><a href="https://github.com/pnpm/pnpm">GitHub</a><a class="github-button" href="https://github.com/pnpm/pnpm" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
                 document.addEventListener('keyup', function(e) {
                   if (e.target !== document.body) {

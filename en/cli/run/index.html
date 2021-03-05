@@ -63,23 +63,30 @@
               }
             });
         </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/pnpm/pnpm.github.io/edit/source/docs/cli/run.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 class="postHeaderTitle">pnpm run</h1></header><article><div><span><p>Aliases: <code>run-script</code></p>
-<p>Runs a defined package script.</p>
-<h2><a class="anchor" aria-hidden="true" id="synopsis"></a><a href="#synopsis" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Synopsis</h2>
-<pre><code class="hljs css language-text">pnpm run [[-r] [--no-bail] [--no-sort] [--workspace-concurrency=&lt;number>]]
-     &lt;command> [-- &lt;args>...]
-</code></pre>
+<p>Runs a script defined in the package's manifest file.</p>
 <h2><a class="anchor" aria-hidden="true" id="examples"></a><a href="#examples" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Examples</h2>
-<p>Run the <code>watch</code> task:</p>
-<pre><code class="hljs css language-text">pnpm run watch
+<p>Let's say you have a <code>watch</code> script configured in your <code>package.json</code>, like so:</p>
+<pre><code class="hljs css language-json">"scripts": {
+    "watch": "build-command --watch"
+}
 </code></pre>
-<p>Same thing without the <code>run</code> keyword will work as well:</p>
-<pre><code class="hljs css language-text">pnpm watch
-</code></pre>
+<p>You can now run that script by using <code>pnpm run watch</code>! Simple, right?
+Another thing to note for those that like to save keystrokes and time is that
+all scripts get aliased in as pnpm commands, so ultimately <code>pnpm watch</code> is just
+shorthand for <code>pnpm run watch</code> (ONLY for scripts that do not share the same name
+as already existing pnpm commands).</p>
 <h2><a class="anchor" aria-hidden="true" id="details"></a><a href="#details" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Details</h2>
-<p>In addition to the shell’s pre-existing <code>PATH</code>, <code>pnpm run</code> adds <code>node_modules/.bin</code>
-to the <code>PATH</code> provided to <code>scripts</code>. As of v3.5, when executed inside a workspace,
-<code>&lt;workspace root&gt;/node_modules/.bin</code> is also added to the <code>PATH</code>, so if a tool
-is installed in the workspace root, it may be called in any workspace package's <code>scripts</code>.</p>
+<p>In addition to the shell’s pre-existing <code>PATH</code>, <code>pnpm run</code> includes
+<code>node_modules/.bin</code> in the <code>PATH</code> provided to <code>scripts</code>. This means that so
+long as you have a package installed, you can use it in a script like a regular
+command. For example, if you have <code>eslint</code> installed, you can write up a script
+like so:</p>
+<pre><code class="hljs css language-json">"lint": "eslint src --fix"
+</code></pre>
+<p>And even though <code>eslint</code> is not installed globally in your shell, it will run.</p>
+<p>For workspaces, as of v3.5, <code>&lt;workspace root&gt;/node_modules/.bin</code> is also added
+to the <code>PATH</code>, so if a tool is installed in the workspace root, it may be called
+in any workspace package's <code>scripts</code>.</p>
 <h2><a class="anchor" aria-hidden="true" id="options"></a><a href="#options" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Options</h2>
 <h3><a class="anchor" aria-hidden="true" id="script-shell"></a><a href="#script-shell" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>script-shell</h3>
 <p>Added in: v5.10.0</p>
@@ -88,23 +95,25 @@ is installed in the workspace root, it may be called in any workspace package's 
 <li>Type: <strong>path</strong></li>
 </ul>
 <p>The shell to use for scripts run with the <code>pnpm run</code> command.</p>
-<p>Probably the most useful example of usage is forcing Git's bash shell on Windows:</p>
-<pre><code class="hljs">pnpm<span class="hljs-built_in"> config </span><span class="hljs-builtin-name">set</span> script-shell <span class="hljs-string">"C:\\Program Files\\git\\bin\\bash.exe
-</span></code></pre>
+<p>For instance, to force usage of Git Bash on Windows:</p>
+<pre><code class="hljs">pnpm<span class="hljs-built_in"> config </span><span class="hljs-builtin-name">set</span> script-shell <span class="hljs-string">"C:\\Program Files\\git\\bin\\bash.exe"</span>
+</code></pre>
 <h3><a class="anchor" aria-hidden="true" id="shell-emulator"></a><a href="#shell-emulator" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>shell-emulator</h3>
 <p>Added in: v5.8.0</p>
 <ul>
 <li>Default: <strong>false</strong></li>
 <li>Type: <strong>Boolean</strong></li>
 </ul>
-<p>When <code>true</code>, pnpm will use a JavaScript implementation of a <a href="https://www.npmjs.com/package/@yarnpkg/shell">bash-like shell</a> to execute scripts.</p>
-<p>This option simplifies cross-platform scripting. For instance, by default the next script will fail on Windows:</p>
-<pre><code class="hljs">{
-  <span class="hljs-attr">"scripts"</span>: {
-    <span class="hljs-attr">"test"</span>: <span class="hljs-string">"NODE_ENV=test node test.js"</span>
-  }
+<p>When <code>true</code>, pnpm will use a JavaScript implementation of a <a href="https://www.npmjs.com/package/@yarnpkg/shell">bash-like shell</a> to
+execute scripts.</p>
+<p>This option simplifies cross-platform scripting. For instance, by default, the
+next script will fail on non-POSIX-compliant systems:</p>
+<pre><code class="hljs css language-json">"scripts": {
+  "test": "NODE_ENV=test node test.js"
+}
 </code></pre>
-<p>But if the <code>shell-emulator</code> setting is set to <code>true</code>, it will work on all platforms.</p>
+<p>But if the <code>shell-emulator</code> setting is set to <code>true</code>, it will work on all
+platforms.</p>
 <h3><a class="anchor" aria-hidden="true" id="recursive-r"></a><a href="#recursive-r" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>--recursive, -r</h3>
 <p>This runs an arbitrary command from each package's &quot;scripts&quot; object.
 If a package doesn't have the command, it is skipped.
@@ -118,16 +127,15 @@ without breaking the execution chain.</p>
 <p>Added in: v5.1.0</p>
 <p>Completely disregard concurrency and topological sorting, running a given script
 immediately in all matching packages with prefixed streaming output. This is the
-preferred flag for long-running processes such as watch run over many packages.</p>
-<pre><code class="hljs css language-text">pnpm run --parallel watch
-</code></pre>
+preferred flag for long-running processes over many packages, for instance, a
+lengthy build process.</p>
 <h3><a class="anchor" aria-hidden="true" id="stream"></a><a href="#stream" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>--stream</h3>
 <p>Added in: v5.1.0</p>
-<p>Stream output from child processes immediately, prefixed with the originating package directory.
-This allows output from different packages to be interleaved.</p>
-<h3><a class="anchor" aria-hidden="true" id="filter-lt-package_selector"></a><a href="#filter-lt-package_selector" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>--filter &lt;package_selector&gt;</h3>
+<p>Stream output from child processes immediately, prefixed with the originating
+package directory. This allows output from different packages to be interleaved.</p>
+<h3><a class="anchor" aria-hidden="true" id="filter-package_selector"></a><a href="#filter-package_selector" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>--filter &lt;package_selector&gt;</h3>
 <p><a href="../filtering">Read more about filtering.</a></p>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/en/cli/why"><span class="arrow-prev">← </span><span>pnpm why</span></a><a class="docs-next button" href="/en/cli/test"><span>pnpm test</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#synopsis">Synopsis</a></li><li><a href="#examples">Examples</a></li><li><a href="#details">Details</a></li><li><a href="#options">Options</a><ul class="toc-headings"><li><a href="#script-shell">script-shell</a></li><li><a href="#shell-emulator">shell-emulator</a></li><li><a href="#recursive-r">--recursive, -r</a></li><li><a href="#if-present">--if-present</a></li><li><a href="#parallel">--parallel</a></li><li><a href="#stream">--stream</a></li><li><a href="#filter-lt-package_selector">--filter &lt;package_selector&gt;</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/pnpm-light.svg" alt="pnpm" width="66" height="58"/></a><div><h5>Docs</h5><a href="/en/installation.html">Getting Started</a></div><div><h5>Community</h5><a href="/en/users.html">User Showcase</a><a href="http://stackoverflow.com/questions/tagged/pnpm" target="_blank">Stack Overflow</a><a href="https://bit.ly/pnpm-discord-invite">Project Chat</a><a href="https://twitter.com/pnpmjs" target="_blank">Twitter</a></div><div><h5>More</h5><a href="/blog/">Blog</a><a href="https://github.com/pnpm/pnpm">GitHub</a><a class="github-button" href="https://github.com/pnpm/pnpm" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/en/cli/why"><span class="arrow-prev">← </span><span>pnpm why</span></a><a class="docs-next button" href="/en/cli/test"><span>pnpm test</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#examples">Examples</a></li><li><a href="#details">Details</a></li><li><a href="#options">Options</a><ul class="toc-headings"><li><a href="#script-shell">script-shell</a></li><li><a href="#shell-emulator">shell-emulator</a></li><li><a href="#recursive-r">--recursive, -r</a></li><li><a href="#if-present">--if-present</a></li><li><a href="#parallel">--parallel</a></li><li><a href="#stream">--stream</a></li><li><a href="#filter-package_selector">--filter &lt;package_selector&gt;</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/pnpm-light.svg" alt="pnpm" width="66" height="58"/></a><div><h5>Docs</h5><a href="/en/installation.html">Getting Started</a></div><div><h5>Community</h5><a href="/en/users.html">User Showcase</a><a href="http://stackoverflow.com/questions/tagged/pnpm" target="_blank">Stack Overflow</a><a href="https://bit.ly/pnpm-discord-invite">Project Chat</a><a href="https://twitter.com/pnpmjs" target="_blank">Twitter</a></div><div><h5>More</h5><a href="/blog/">Blog</a><a href="https://github.com/pnpm/pnpm">GitHub</a><a class="github-button" href="https://github.com/pnpm/pnpm" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
                 document.addEventListener('keyup', function(e) {
                   if (e.target !== document.body) {
                     return;

@@ -63,33 +63,40 @@
               }
             });
         </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/pnpm/pnpm.github.io/edit/source/docs/aliases.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 class="postHeaderTitle">Aliases</h1></header><article><div><span><p>Aliases let you install packages with custom names.</p>
-<p>Lets' assume you use <code>lodash</code> all over your project. There is a bug in <code>lodash</code> that breaks your project.
-You have a fix but <code>lodash</code> won't merge it. Normally you would either install <code>lodash</code> from your fork
-directly (as a git-hosted dependency) or publish it with a different name. If you use the second solution
-you have to replace all the requires in your project with the new dependency name (<code>require('lodash')</code> =&gt; <code>require('awesome-lodash')</code>)`.
-With aliases, you have a third option.</p>
-<p>Publish a new package called <code>awesome-lodash</code> and install it using <code>lodash</code> as its alias:</p>
+<p>Let's assume you use <code>lodash</code> all over your project. There is a bug in <code>lodash</code>
+that breaks your project. You have a fix but <code>lodash</code> won't merge it. Normally
+you would either install <code>lodash</code> from your fork directly (as a git-hosted
+dependency) or publish it with a different name. If you use the second solution
+you have to replace all the requires in your project with the new dependency
+name (<code>require('lodash')</code> =&gt; <code>require('awesome-lodash')</code>). With aliases, you
+have a third option.</p>
+<p>Publish a new package called <code>awesome-lodash</code> and install it using <code>lodash</code> as
+its alias:</p>
 <pre><code class="hljs">pnpm add lodash<span class="hljs-variable">@npm</span><span class="hljs-symbol">:awesome-lodash</span>
 </code></pre>
-<p>No changes in code are needed. All the requires of <code>lodash</code> will import <code>awesome-lodash</code>.</p>
-<p>Sometimes you'll want to use two different versions of a package in your project. Easy:</p>
+<p>No changes in code are needed. All the requires of <code>lodash</code> will now resolve to
+<code>awesome-lodash</code>.</p>
+<p>Sometimes you'll want to use two different versions of a package in your
+project. Easy:</p>
 <pre><code class="hljs css language-sh">pnpm add lodash1@npm:lodash@1
 pnpm add lodash2@npm:lodash@2
 </code></pre>
-<p>Now you can require the first version of lodash via <code>require('lodash1')</code> and the second via <code>require('lodash2')</code>.</p>
-<p>This gets even more powerful when combined with hooks. Maybe you want to replace <code>lodash</code> with <code>awesome-lodash</code>
-in all the packages in <code>node_modules</code>. You can easily achieve that with the following <code>pnpmfile.js</code>:</p>
-<pre><code class="hljs css language-js"><span class="hljs-built_in">module</span>.exports = {
-  <span class="hljs-attr">hooks</span>: {
-    readPackage
-  }
-}
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">readPackage</span> (<span class="hljs-params">pkg</span>) </span>{
+<p>Now you can require the first version of lodash via <code>require('lodash1')</code> and the
+second via <code>require('lodash2')</code>.</p>
+<p>This gets even more powerful when combined with hooks. Maybe you want to replace
+<code>lodash</code> with <code>awesome-lodash</code> in all the packages in <code>node_modules</code>. You can
+easily achieve that with the following <code>pnpmfile.js</code>:</p>
+<pre><code class="hljs css language-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">readPackage</span>(<span class="hljs-params">pkg</span>) </span>{
   <span class="hljs-keyword">if</span> (pkg.dependencies &amp;&amp; pkg.dependencies.lodash) {
     pkg.dependencies.lodash = <span class="hljs-string">'npm:awesome-lodash@^1.0.0'</span>
   }
   <span class="hljs-keyword">return</span> pkg
+}
+
+<span class="hljs-built_in">module</span>.exports = {
+  <span class="hljs-attr">hooks</span>: {
+    readPackage
+  }
 }
 </code></pre>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/en/workspaces"><span class="arrow-prev">← </span><span>Workspace</span></a><a class="docs-next button" href="/en/completion"><span>Command line tab-completion</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/pnpm-light.svg" alt="pnpm" width="66" height="58"/></a><div><h5>Docs</h5><a href="/en/installation.html">Getting Started</a></div><div><h5>Community</h5><a href="/en/users.html">User Showcase</a><a href="http://stackoverflow.com/questions/tagged/pnpm" target="_blank">Stack Overflow</a><a href="https://bit.ly/pnpm-discord-invite">Project Chat</a><a href="https://twitter.com/pnpmjs" target="_blank">Twitter</a></div><div><h5>More</h5><a href="/blog/">Blog</a><a href="https://github.com/pnpm/pnpm">GitHub</a><a class="github-button" href="https://github.com/pnpm/pnpm" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
