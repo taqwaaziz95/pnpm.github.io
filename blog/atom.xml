@@ -2,38 +2,23 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://pnpm.js.org/blog</id>
     <title>pnpm Blog</title>
-    <updated>2020-10-17T06:00:00Z</updated>
-    <generator>Feed for Node.js</generator>
+    <updated>2020-10-17T00:00:00.000Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://pnpm.js.org/blog"/>
-    <subtitle>The best place to stay up-to-date with the latest pnpm news and events.</subtitle>
-    <logo>https://pnpm.js.org/img/pnpm-no-name-with-frame.svg</logo>
-    <rights>Copyright © 2021 contributors of pnpm</rights>
+    <subtitle>pnpm Blog</subtitle>
+    <icon>https://pnpm.js.org/img/favicon.png</icon>
     <entry>
         <title type="html"><![CDATA[Node-Modules configuration options with pnpm]]></title>
-        <id>https://pnpm.js.org/blog/2020/10/17/node-modules-configuration-options-with-pnpm.html</id>
-        <link href="https://pnpm.js.org/blog/2020/10/17/node-modules-configuration-options-with-pnpm.html">
-        </link>
-        <updated>2020-10-17T06:00:00Z</updated>
-        <summary type="html"><![CDATA[<p>There are many ways to create a node_modules directory.
-Your goal must be to create the most strict one but if that is not possible,
-there are options to make a loose node_modules as well.</p>
-]]></summary>
-        <author>
-            <name>Zoltan Kochan</name>
-            <uri>http://twitter.com/zoltankochan</uri>
-        </author>
+        <id>Node-Modules configuration options with pnpm</id>
+        <link href="https://pnpm.js.org/blog/2020/10/17/node-modules-configuration-options-with-pnpm"/>
+        <updated>2020-10-17T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[There are many ways to create a node_modules directory.]]></summary>
     </entry>
     <entry>
         <title type="html"><![CDATA[Flat node_modules is not the only way]]></title>
-        <id>https://pnpm.js.org/blog/2020/05/27/flat-node-modules-is-not-the-only-way.html</id>
-        <link href="https://pnpm.js.org/blog/2020/05/27/flat-node-modules-is-not-the-only-way.html">
-        </link>
-        <updated>2020-05-27T06:00:00Z</updated>
-        <summary type="html"><![CDATA[<p>New users of pnpm frequently ask me about the weird structure of <code>node_modules</code> that pnpm creates. Why is it not flat? Where are all the sub-dependencies?</p>
-]]></summary>
-        <author>
-            <name>Zoltan Kochan</name>
-            <uri>http://twitter.com/zoltankochan</uri>
-        </author>
+        <id>Flat node_modules is not the only way</id>
+        <link href="https://pnpm.js.org/blog/2020/05/27/flat-node-modules-is-not-the-only-way"/>
+        <updated>2020-05-27T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[New users of pnpm frequently ask me about the weird structure of node_modules that pnpm creates. Why is it not flat? Where are all the sub-dependencies?]]></summary>
     </entry>
 </feed>
